@@ -1,14 +1,16 @@
--- Create database for ALX Book Store
+-- ALX Book Store Database Schema
+-- GitHub Repository: Intro_to_DB
+
 CREATE DATABASE IF NOT EXISTS alx_book_store;
 USE alx_book_store;
 
--- Create Authors table
+-- Authors Table
 CREATE TABLE IF NOT EXISTS Authors (
     author_id INT PRIMARY KEY,
     author_name VARCHAR(215)
 );
 
--- Create Customers table
+-- Customers Table  
 CREATE TABLE IF NOT EXISTS Customers (
     customer_id INT PRIMARY KEY,
     customer_name VARCHAR(215),
@@ -16,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Customers (
     address TEXT
 );
 
--- Create Books table
+-- Books Table
 CREATE TABLE IF NOT EXISTS Books (
     book_id INT PRIMARY KEY,
     title VARCHAR(130),
@@ -26,7 +28,7 @@ CREATE TABLE IF NOT EXISTS Books (
     FOREIGN KEY (author_id) REFERENCES Authors(author_id)
 );
 
--- Create Orders table
+-- Orders Table
 CREATE TABLE IF NOT EXISTS Orders (
     order_id INT PRIMARY KEY,
     customer_id INT,
@@ -34,12 +36,12 @@ CREATE TABLE IF NOT EXISTS Orders (
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
--- Create Order_Details table
+-- Order_Details Table - FIXED: quantity DOUBLE instead of INT
 CREATE TABLE IF NOT EXISTS Order_Details (
     order_detail_id INT PRIMARY KEY,
     order_id INT,
     book_id INT,
-    quantity INT,
+    quantity DOUBLE,  -- CHANGED FROM INT TO DOUBLE
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
